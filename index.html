@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Job Board</title>
+
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background: #f5f7fa;
+}
+
+/* Navbar */
+nav {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 60px;
+  background: linear-gradient(135deg, #1e90ff, #007bff);
+  color: white;
+}
+
+nav h2 {
+  font-weight: 600;
+}
+
+nav ul {
+  display: flex;
+  gap: 20px;
+  list-style: none;
+}
+
+nav ul li {
+  cursor: pointer;
+}
+
+/* Hero Section */
+.hero {
+  background: linear-gradient(135deg, #1e90ff, #007bff);
+  color: white;
+  padding: 80px 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.hero-text {
+  max-width: 500px;
+}
+
+.hero h1 {
+  font-size: 40px;
+  margin: 10px 0;
+}
+
+.hero button {
+  margin-top: 20px;
+  padding: 12px 20px;
+  border: none;
+  background: #00c853;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Search */
+.search-bar {
+  margin: -30px auto;
+  width: 80%;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  display: flex;
+  gap: 10px;
+  box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
+}
+
+.search-bar input {
+  flex: 1;
+  padding: 10px;
+}
+
+.search-bar button {
+  background: #00c853;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+}
+
+/* Job Cards */
+.jobs {
+  padding: 80px 60px;
+}
+
+.job-card {
+  background: white;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 3px 8px rgba(0,0,0,0.1);
+}
+
+.job-card h3 {
+  color: #007bff;
+}
+
+.job-card button {
+  margin-top: 10px;
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+}
+
+/* Responsive */
+@media(max-width: 768px) {
+  .hero {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .search-bar {
+    flex-direction: column;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- Navbar -->
+<nav>
+  <h2>JobBoard</h2>
+  <ul>
+    <li>Home</li>
+    <li>Jobs</li>
+    <li>Dashboard</li>
+    <li>Login</li>
+  </ul>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-text">
+    <p>4536+ Jobs listed</p>
+    <h1>Find your Dream Job</h1>
+    <p>Search and apply to jobs easily with our platform.</p>
+    <button>Upload Resume</button>
+  </div>
+  <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" width="200">
+</section>
+
+<!-- Search -->
+<div class="search-bar">
+  <input type="text" id="search" placeholder="Search job...">
+  <button onclick="searchJobs()">Find Job</button>
+</div>
+
+<!-- Jobs -->
+<section class="jobs" id="jobList"></section>
+
+<script>
+const jobs = [
+  {title: "Frontend Developer", company: "Google", location: "Bangalore"},
+  {title: "Backend Developer", company: "Amazon", location: "Hyderabad"},
+  {title: "Full Stack Developer", company: "Microsoft", location: "Delhi"},
+];
+
+function displayJobs(data) {
+  const container = document.getElementById("jobList");
+  container.innerHTML = "";
+
+  data.forEach(job => {
+    container.innerHTML += `
+      <div class="job-card">
+        <h3>${job.title}</h3>
+        <p>${job.company} - ${job.location}</p>
+        <button onclick="applyJob('${job.title}')">Apply</button>
+      </div>
+    `;
+  });
+}
+
+function searchJobs() {
+  const value = document.getElementById("search").value.toLowerCase();
+  const filtered = jobs.filter(job => job.title.toLowerCase().includes(value));
+  displayJobs(filtered);
+}
+
+function applyJob(jobTitle) {
+  alert("Applied for " + jobTitle);
+}
+
+displayJobs(jobs);
+</script>
+
+</body>
+</html>
